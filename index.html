@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>rock</title>
+    <style>
+        body{
+            font-family: sans-serif;
+        }
+
+  
+    </style>
+
+</head>
+<body>
+    <h1>ROCK PAPER SCISSORS</h1>
+
+
+
+
+
+
+
+
+<script>
+
+    let computer = function (){
+        let choose = ["rock","paper","scissors"]
+        return  choose[ Math.floor(Math.random() * choose.length)];
+    };
+
+    let human = prompt("");
+
+
+    function playRound(playerSelection, computerSelection) {
+
+
+
+      if (playerSelection === "rock" && computerSelection === "scissors" ||
+          playerSelection === "paper" && computerSelection === "rock"||
+          playerSelection === "scissors" && computerSelection === "paper") {
+
+        console.log("Your choose "+ playerSelection +" Computer choose "+ computerSelection + " you WIN...")
+
+      } else if (playerSelection === computerSelection){
+          console.log("SAME CHOOSE...")
+      } else {
+          console.log("Your choose "+ playerSelection +" Computer choose "+ computerSelection + " you LOSE...")
+      }
+
+    }
+
+    playRound(human,computer())
+
+</script>
+</body>
+</html>

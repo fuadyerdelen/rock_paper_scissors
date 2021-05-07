@@ -1,57 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>rock</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     <style>
-        body{
-            font-family: sans-serif;
+        body {
+            font-family: 'Ubuntu', sans-serif;
         }
 
-  
+        h1 {
+            text-align: center;
+        }
+
+        .score {
+            border: 2px solid black;
+            position: absolute;
+            width: 10%;
+            top: 12px;
+            height: 100px;
+            font-size: 5vw;
+            text-align: center;
+        }
+
+        #scoreComputer {
+
+            right: 1px;
+        }
+
+        .game {
+            margin-top: 100px;
+        }
+
+        .chose {
+            display: inline-block;
+            width: 27%;
+            height: 250px;
+            margin-left: 60px;
+            border-radius: 12px;
+
+        }
+
+        .chose:hover {
+            transform: scale(1.1);
+            transition-duration: 0.4s;
+        }
+
+        .chose:active {
+            transform: scale(0.9);
+
+        }
+
+        .result {
+            display: inline-block;
+            border: solid 2px black;
+            width: 30%;
+            height: 100px;
+            margin: 50px;
+            margin-left: 465px;
+            font-size: 2vw;
+
+        }
+
+        #rock {
+            background-image: url("rock.jpg");
+            background-size: cover;
+
+        }
+
+        #paper {
+            background-image: url("paper.jpg");
+            background-size: cover;
+        }
+
+        #scissors {
+            background-image: url("scissors.jpg");
+            background-size: cover;
+        }
     </style>
 
 </head>
+
 <body>
     <h1>ROCK PAPER SCISSORS</h1>
 
+    <span class="score" id="scoreHuman">0</span>
+    <span class="score" id="scoreComputer">0</span>
 
 
+    <div class="game">
+
+        <a href="#" id="rock" class="chose" onclick="playRound('rock');"></a>
+        <a href="#" id="paper" class="chose" onclick="playRound('paper');"></a>
+        <a href="#" id="scissors" class="chose" onclick="playRound('scissors');"></a>
+
+        <div class="result"></div>
+    </div>
 
 
+    <script>
+        let humanScore = 0;
+        let computerScore = 0;
+
+        const computer = function () {
+            let choose = ["rock", "paper", "scissors"]
+            return choose[Math.floor(Math.random() * choose.length)];
+        };
+
+        // document.querySelector('#rock').addEventListener('click', () => {
+        //     return human = "rock";
+        // });
+        // document.querySelector('#paper').addEventListener('click', () => {
+        //     return human = "paper";
+        // });
+        // document.querySelector('#scissors').addEventListener('click', () => {
+        //     return human = "scissors";
+        // });
+
+        function hWin() {
+            humanScore++;
+            document.getElementById('scoreHuman').innerHTML = humanScore;
+        }
+
+        function cWin() {
+            computerScore++;
+            document.getElementById('scoreComputer').innerHTML = computerScore;
+        }
+
+        function check() {
+            if ((computerScore + humanScore) === 5) {
+                
+                document.getElementById('scoreHuman').innerHTML = 0;
+                document.getElementById('scoreComputer').innerHTML = 0;
+                computerScore = 0;
+                humanScore = 0;
+            }
+        }
 
 
+        function playRound(choice) {
+            const playerSelection = choice;
+            const computerSelection = computer();
 
-<script>
-
-    let computer = function (){
-        let choose = ["rock","paper","scissors"]
-        return  choose[ Math.floor(Math.random() * choose.length)];
-    };
-
-    let human = prompt("");
-
-
-    function playRound(playerSelection, computerSelection) {
-
-
-
-      if (playerSelection === "rock" && computerSelection === "scissors" ||
-          playerSelection === "paper" && computerSelection === "rock"||
-          playerSelection === "scissors" && computerSelection === "paper") {
-
-        console.log("Your choose "+ playerSelection +" Computer choose "+ computerSelection + " you WIN...")
-
-      } else if (playerSelection === computerSelection){
-          console.log("SAME CHOOSE...")
-      } else {
-          console.log("Your choose "+ playerSelection +" Computer choose "+ computerSelection + " you LOSE...")
-      }
-
-    }
-
-    playRound(human,computer())
-
-</script>
+            if (playerSelection === "rock" && computerSelection === "scissors" ||
+                playerSelection === "paper" && computerSelection === "rock" ||
+                playerSelection === "scissors" && computerSelection === "paper") {
+                document.querySelector('.result').innerHTML = "Your choose " + playerSelection +
+                    " Computer choose " +
+                    computerSelection + " you WIN...";
+                hWin();
+            } else if (playerSelection === computerSelection) {
+                document.querySelector('.result').innerHTML = "SAME CHOOSE...";
+            } else {
+                document.querySelector('.result').innerHTML = "Your choose " + playerSelection +
+                    " Computer choose " +
+                    computerSelection +
+                    " you LOSE...";
+                cWin();
+            }
+            check();
+        }
+    </script>
 </body>
+
 </html>
